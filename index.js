@@ -28,9 +28,14 @@ function processFirstItem(stringList, callback) {
  * 
  * 1. What is the difference between counter1 and counter2?
  * 
+ * counter1 is being saved in a variable, count1 has the count inside the function and count 2 has it on a global level.
+ * 
  * 2. Which of the two uses a closure? How can you tell?
+ * counter1 because count is being passed down to another function.
  * 
  * 3. In what scenario would the counter1 code be preferable? In what scenario would counter2 be better? 
+ counter1 to keep track of multiple counts. counter2 when you need a global count
+ *
  *
 */
 
@@ -56,10 +61,8 @@ function counter2() {
 
 Write a function called `inning` that generates a random number of points that a team scored in an inning. This should be a whole number between 0 and 2. */
 
-function inning(/*Code Here*/){
-
-    /*Code Here*/
-
+function inning(){  
+   return Math.floor(Math.random() * 3);
 }
 
 /* Task 3: finalScore()
@@ -76,11 +79,26 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
 
-  /*Code Here*/
-
+function finalScore(inning,num){
+  let score = {
+    home:0,
+    away:0
+  }
+  console.log(inning())
+  for(let i = 1; i<= num; i++) {
+    let j = inning();
+    score.away += j;
+  }
+  
+  for(let i = 1; i<= num; i++) {
+     let j = inning();
+     score.home += j;
+  }
+  return score;
+  
 }
+
 
 /* Task 4: 
 
@@ -104,8 +122,31 @@ and returns the score at each pont in the game, like so:
 
 Final Score: awayTeam - homeTeam */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function getInningScore(score1,score2) {
+  let score = {
+    home:score1,
+    away:score2
+  }
+  return score;
 }
+
+
+function scoreboard(getInningScore,inning,num) {
+  let score = {
+    home:0,
+    away:0
+  }
+
+  for (let i = 1; i<= num; i++) {
+    let j = inning();
+    score.away += j;
+    let a = inning();
+    score.home += a;
+    console.log(getInningScore(score.home,score.away))
+   }
+   return score;
+}
+
+scoreboard(getInningScore,inning,5);
 
 
